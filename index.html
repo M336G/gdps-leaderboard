@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="GDPS Leaderboard" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <meta name="author" content="M336">
+    <title id="title">The GDPS Leaderboard</title>
+    <meta name="description"
+        content="A leaderboard for Geometry Dash Private Servers based on the total amount of Discord members each has">
+    <meta name="keywords"
+        content="leaderboard, members, discord, geometry, dash, private, server, gd, gdps, hub, gdpshub">
+
+    <meta name="robots" content="index">
+    <meta http-equiv="content-language" content="en">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div id="header">
+        <h1>The GDPS Leaderboard</h1>
+        <p>A leaderboard for Geometry Dash Private Servers based on the total amount of Discord members each has</p>
+        <p><a style="color: #616acd; text-decoration: underline;" href="https://github.com/M336G/gdps-list/issues" target="_blank">Suggest more here!</a></p>
+        <p id="loading">Loading...</p>
+    </div>
+
+    <div id="leaderboard"></div>
+
+    <div id="pagination">
+        <button id="previous">Previous</button>
+        <span id="page-indicator"></span>
+        <button id="next">Next</button>
+    </div>
+
+    <p id="error-message"></p>
+</body>
+
+</html>
