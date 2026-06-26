@@ -12,24 +12,87 @@ const GDPS_LIST = [
     { name: "Neopointfour", gdpshub: 2133, discord: "yvpuqBm" },
     { name: "WORST GDPS", gdpshub: 130, discord: "kCf5jQSNCm" },
     { name: "McGDPS", gdpshub: 106, discord: "p9dB4h8YZw" },
-    { name: "PixelDash", gdpshub: 5703, discord: "bKGys8dUBv" },
     { name: "SilvrPS", gdpshub: 8, discord: "vnC4Z5nKm3" },
     { name: "DindeGDPS", gdpshub: 4, discord: "sVcFBddjfj" },
     { name: "GreenCatsServer", gdpshub: 80, discord: "GAk2nA8" },
     { name: "1.9 GDPS", discord: "eCGFrCG" },
-    { name: "1.3 GDPS", gdpshub: 1407, discord: "BcptsnvDz6" }
+    { name: "1.3 GDPS", gdpshub: 1407, discord: "BcptsnvDz6" },
+    { name: "Cvolton GDPS", discord: "pYw57RQ" },
+    { name: "1.0 GDPS (ascendddd)", discord: "FDthGT3BED" },
+    { name: "Rageous LegacyGDPS", discord: "UT6jKFUYyK" },
+    { name: "1.5 GDPS", discord: "gs4P8UAwDT" },
+    { name: "CnekGDPS", discord: "ExMhNRkGEF" },
+    { name: "1.2 GDPS", discord: "75hXKqNVum" },
+    { name: "GDPS Editor 2.3", discord: "UzV6sUjM7w" },
+    { name: "1.6 GDPS", gdpshub: 2234, discord: "t7DVGua2zw" },
+    { name: "2.1 GDPS", gdpshub: 1898, discord: "N8MX2mZKCF" },
+    { name: "Geometrix", gdpshub: 252, discord: "HCAvyVs" },
+    { name: "KGDPS", gdpshub: 4571, discord: "3Up2nxbkSr" },
+    { name: "Warp Dash", gdpshub: 5357, discord: "f28Hs6mZCb" },
+    { name: "Geometry Dash Story Mode", discord: "njgdpkQ6WN" },
+    { name: "1.8 GDPS", gdpshub: 4441, discord: "9NEz84gdHx" },
+    { name: "gCPS", discord: "eZcynVMhrF" },
+    { name: "WhirlGDPS", gdpshub: 2126, discord: "wD6hWJdvDR" },
+    { name: "GDPS All Admin", gdpshub: 1081, discord: "wD6hWJdvDR" },
+    { name: "1.0 GDPS (Nixion)", gdpshub: 2263, discord: "hsM4vyDU62" },
+    { name: "KatVietGDPS", gdpshub: 5338, discord: "v5v9k5gB9x" }
 ];
+
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function requestDiscordInfo(url, maxRetries = 3) {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+            const req = await fetch(url);
+
+            if (req.status === 429) {
+                const data = await req.json();
+                const waitTime = (data.retry_after || 1) * 1000;
+
+                console.warn(`Rate limited; retrying after ${waitTime}ms`);
+                await sleep(waitTime);
+                continue;
+            }
+
+            if (!req.ok)
+                throw new Error(`Discord API request failed with code ${req.status}`);
+
+            return await req.json();
+        } catch (error) {
+            if (attempt === maxRetries)
+                throw error;
+
+            await sleep(1000 * Math.pow(2, attempt));
+        }
+    }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
     const gdps_list = [];
+    const loadingText = document.getElementById("loading");
 
     for (const gdps of GDPS_LIST) {
+        loadingText.textContent = `Loading... ${gdps.name}`;
+
         try {
-            const req = await fetch(`https://discord.com/api/v8/invites/${gdps.discord}?with_counts=true`);
-            if (!req.ok)
-                throw new Error(`Discord API failed with code ${req.status}`);
-        
-            const data = await req.json();
+            let data;
+            const cachedRaw = localStorage.getItem(gdps.discord);
+
+            if (cachedRaw) {
+                const cached = JSON.parse(cachedRaw);
+                if (Date.now() - cached.timestamp < 10 * 60 * 1000)
+                    data = cached.data;
+            }
+            if (!data) {
+                data = await requestDiscordInfo(`https://discord.com/api/v8/invites/${gdps.discord}?with_counts=true`);
+                localStorage.setItem(gdps.discord, JSON.stringify({
+                    timestamp: Date.now(),
+                    data: {
+                        approximate_member_count: data.approximate_member_count,
+                        guild: { id: data.guild.id, icon: data.guild.icon }
+                    }
+                }));
+            }
 
             gdps.count = data.approximate_member_count;
             gdps.url = gdps.gdpshub
