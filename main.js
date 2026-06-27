@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (cachedRaw) {
                 const cached = JSON.parse(cachedRaw);
-                if (Date.now() - cached.timestamp < 10 * 60 * 1000)
+                if (Date.now() - cached.timestamp < 1 * 60 * 60 * 1000) // 1h
                     data = cached.data;
             }
             if (!data) {
