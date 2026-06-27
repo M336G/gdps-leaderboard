@@ -14,7 +14,6 @@ const GDPS_LIST = [
     { name: "McGDPS", gdpshub: 106, discord: "p9dB4h8YZw" },
     { name: "SilvrPS", gdpshub: 8, discord: "vnC4Z5nKm3" },
     { name: "DindeGDPS", gdpshub: 4, discord: "sVcFBddjfj" },
-    { name: "GreenCatsServer", gdpshub: 80, discord: "GAk2nA8" },
     { name: "1.9 GDPS", discord: "eCGFrCG" },
     { name: "1.3 GDPS", gdpshub: 1407, discord: "BcptsnvDz6" },
     { name: "Cvolton GDPS", discord: "pYw57RQ" },
