@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     timestamp: Date.now(),
                     data: {
                         approximate_member_count: data.approximate_member_count,
-                        guild: { id: data.guild.id, icon: data.guild.icon }
+                        guild: { id: data.guild.id, icon: data.guild.icon, banner: data.guild.banner },
                     }
                 }));
             }
@@ -100,6 +100,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             gdps.icon = gdps.gdpshub
                 ? `https://gdpshub.b-cdn.net/gdps/${gdps.gdpshub}/pfp`
                 : `https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.webp?size=80&quality=lossless`;
+
+            gdps.banner = data.guild.banner
+                ? `https://cdn.discordapp.com/banners/${data.guild.id}/${data.guild.banner}.webp?size=480`
+                : null;
 
             gdps_list.push(gdps);
         } catch (error) {
@@ -123,19 +127,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         slice.forEach((gdps, i) => {
             const index = start + i;
             const entry = document.createElement("div");
-            
-            const medal = ["gold", "silver", "bronze"][index] ?? "";
+
+            const medal = ["gold", "silver", "bronze"][index]?? "";
             entry.className = `entry ${medal}`;
-            
+
+            if (gdps.banner) {
+                entry.style.backgroundImage = `url(${gdps.banner})`;
+                entry.classList.add('has-banner');
+            }
+
             entry.innerHTML = `
-                <span class="rank">#${index + 1}</span>
-                <img src="${gdps.icon}" alt="${gdps.name}'s logo" width="45" height="45" style="border-radius: 50%;" onerror="this.src='assets/default-icon.webp'">
-                <span class="name">
-                    <a href="${gdps.url}" target="_blank">${gdps.name}</a>
-                </span>
-                <span class="stats">
-                    <em><a href="https://discord.gg/${gdps.discord}" target="_blank">${gdps.count.toLocaleString()} members</a></em>
-                </span>
+                <div class="entry-content">
+                    <span class="rank">#${index + 1}</span>
+                    <img src="${gdps.icon}" alt="${gdps.name}'s logo" width="45" height="45" style="border-radius: 50%;" onerror="this.src='assets/default-icon.webp'">
+                    <span class="name">
+                        <a href="${gdps.url}" target="_blank">${gdps.name}</a>
+                    </span>
+                    <span class="stats">
+                        <em><a href="https://discord.gg/${gdps.discord}" target="_blank">${gdps.count.toLocaleString()} members</a></em>
+                    </span>
+                </div>
             `;
 
             leaderboard.appendChild(entry);

@@ -1,5 +1,5 @@
 body {
-    background-color: #1e1e2e;
+    background: linear-gradient(135deg, #1e1e2e 0%, #11111b 50%, #1e1e2e 100%);
     color: #cdd6f4;
     font-family: sans-serif;
     margin: 0;
@@ -14,6 +14,8 @@ body {
     flex-direction: column;
     gap: 8px;
     padding: 10px;
+    width: 60%;
+    margin: 0 auto;
 }
 
 #pagination {
@@ -53,38 +55,64 @@ body {
     align-items: center;
     gap: 12px;
     background-color: rgba(69, 71, 90, 0.5);
-    border: 1px solid #313244;
+    border: 1px solid #4f5062;
     border-radius: 8px;
     padding: 12px 16px;
     box-sizing: border-box;
     backdrop-filter: blur(4px);
     transition: background-color 0.2s;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
 }
 
-.entry:hover {
-    background-color: rgba(69, 71, 90, 0.75);
+.entry.has-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 46, 0.85);
+    backdrop-filter: blur(3px) brightness(0.5);
+    z-index: 0;
 }
+
+.entry.has-banner { background-color: rgba(69, 71, 90, 0.5); }
+
+.entry-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.entry:hover { background-color: rgba(69, 71, 90, 0.75); }
+.entry.has-banner:hover::before { background: rgba(30, 30, 46, 0.75); }
 
 .entry.gold {
     border-color: #f1c40f;
     background-color: rgba(241, 196, 15, 0.15);
 }
+.entry.gold.has-banner::before { background: rgba(241, 196, 15, 0.15); }
 .entry.gold:hover { background-color: rgba(241, 196, 15, 0.25); }
-.entry.gold .rank { color: #f1c40f; }
+.entry.gold.has-banner:hover::before { background: rgba(241, 196, 15, 0.25); }
 
 .entry.silver {
     border-color: #d0d0d0;
     background-color: rgba(255, 255, 255, 0.15);
 }
+.entry.silver.has-banner::before { background: rgba(255, 255, 255, 0.15); }
 .entry.silver:hover { background-color: rgba(255, 255, 255, 0.25); }
-.entry.silver .rank { color: #aaa; }
+.entry.silver.has-banner:hover::before { background: rgba(255, 255, 255, 0.25); }
 
 .entry.bronze {
     border-color: #cd7f32;
     background-color: rgba(205, 127, 50, 0.15);
 }
+.entry.bronze.has-banner::before { background: rgba(205, 127, 50, 0.15); }
 .entry.bronze:hover { background-color: rgba(205, 127, 50, 0.25); }
-.entry.bronze .rank { color: #cd7f32; }
+.entry.bronze.has-banner:hover::before { background: rgba(205, 127, 50, 0.25); }
 
 .entry .rank {
     font-size: 1.1em;
@@ -103,7 +131,7 @@ body {
     display: flex;
     gap: 16px;
     font-size: 0.85em;
-    color: #a6adc8;
+    color: #c0c6dc;
 }
 
 a {
@@ -121,4 +149,16 @@ a:hover {
     align-items: center;
     color: rgb(191, 69, 69);
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    #header p {
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    #leaderboard {
+        width: 95%;
+    }
 }
