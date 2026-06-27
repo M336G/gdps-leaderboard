@@ -10,7 +10,7 @@ const GDPS_LIST = [
     { name: "Platinum GDPS Reborn", gdpshub: 2173, discord: "nqNBZQXEGM" },
     { name: "Rick GDPS", gdpshub: 5598, discord: "ZcvdqTAr8" },
     { name: "Neopointfour", gdpshub: 2133, discord: "yvpuqBm" },
-    { name: "WORST GDPS", gdpshub: 130, discord: "kCf5jQSNCm" },
+    { name: "WORST GDPS", /*gdpshub: 130,*/ discord: "kCf5jQSNCm" },
     { name: "McGDPS", gdpshub: 106, discord: "p9dB4h8YZw" },
     { name: "SilvrPS", gdpshub: 8, discord: "vnC4Z5nKm3" },
     { name: "DindeGDPS", gdpshub: 4, discord: "sVcFBddjfj" },
@@ -25,16 +25,16 @@ const GDPS_LIST = [
     { name: "GDPS Editor 2.3", discord: "UzV6sUjM7w" },
     { name: "1.6 GDPS", gdpshub: 2234, discord: "t7DVGua2zw" },
     { name: "2.1 GDPS", gdpshub: 1898, discord: "N8MX2mZKCF" },
-    { name: "Geometrix", gdpshub: 252, discord: "HCAvyVs" },
-    { name: "KGDPS", gdpshub: 4571, discord: "3Up2nxbkSr" },
+    { name: "Geometrix", /*gdpshub: 252,*/ discord: "HCAvyVs" },
+    { name: "KGDPS", /*gdpshub: 4571,*/ discord: "3Up2nxbkSr" },
     { name: "Warp Dash", gdpshub: 5357, discord: "f28Hs6mZCb" },
     { name: "Geometry Dash Story Mode", discord: "njgdpkQ6WN" },
     { name: "1.8 GDPS", gdpshub: 4441, discord: "9NEz84gdHx" },
     { name: "gCPS", discord: "eZcynVMhrF" },
     { name: "WhirlGDPS", gdpshub: 2126, discord: "wD6hWJdvDR" },
-    { name: "GDPS All Admin", gdpshub: 1081, discord: "wD6hWJdvDR" },
+    { name: "GDPS All Admin", /*gdpshub: 1081,*/ discord: "rSQn4fRxdY" },
     { name: "1.0 GDPS (Nixion)", gdpshub: 2263, discord: "hsM4vyDU62" },
-    { name: "KatVietGDPS", gdpshub: 5338, discord: "v5v9k5gB9x" }
+    { name: "KatVietGDPS", /*gdpshub: 5338,*/ discord: "v5v9k5gB9x" }
 ];
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
