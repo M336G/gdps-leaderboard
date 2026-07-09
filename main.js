@@ -34,7 +34,8 @@ const GDPS_LIST = [
     { name: "WhirlGDPS", gdpshub: 2126, discord: "wD6hWJdvDR" },
     { name: "GDPS All Admin", /*gdpshub: 1081,*/ discord: "rSQn4fRxdY" },
     { name: "1.0 GDPS (Nixion)", gdpshub: 2263, discord: "hsM4vyDU62" },
-    { name: "KatVietGDPS", /*gdpshub: 5338,*/ discord: "v5v9k5gB9x" }
+    { name: "KatVietGDPS", /*gdpshub: 5338,*/ discord: "v5v9k5gB9x" },
+    { name: "ColaGDPS", gdpshub: 5550, discord: "5p4pbEmpRA" }
 ];
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
